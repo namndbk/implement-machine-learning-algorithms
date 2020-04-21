@@ -7,7 +7,7 @@ from scipy.stats import itemfreq
 
 class KNN(object):
 
-    _metric = ["euclidean", "cosine"]
+    _metric = ["euclidean", "manhattan"]
 
     def __init__(self, K, metric="euclidean"):
         self.K = K
@@ -18,8 +18,8 @@ class KNN(object):
         return cdist(X_test, self.X, "euclidean")
 
 
-    def cosine_similarity(self, X_test):
-        return cdist(X_test, self.X, "cosine")
+    def l1_distance(self, X_test):
+        return cdist(X_test, self.X, "manhattan")
     
 
     def distance(self, X_test):
