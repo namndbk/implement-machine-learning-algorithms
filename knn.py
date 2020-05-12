@@ -14,15 +14,15 @@ class KNN(object):
         self.metric = metric
 
 
-    def l2_distance(self, X_test):
+    def _l2_distance(self, X_test):
         return cdist(X_test, self.X, "euclidean")
 
 
-    def l1_distance(self, X_test):
+    def _l1_distance(self, X_test):
         return cdist(X_test, self.X, "manhattan")
     
 
-    def distance(self, X_test):
+    def _distance(self, X_test):
         return cdist(X_test, self.X, metric=self.metric)
 
 
@@ -36,7 +36,7 @@ class KNN(object):
         X_test = np.array(X_test)
         if self.metric not in self._metric:
             self.metric = "euclidean"
-        dist = self.distance(X_test)
+        dist = self._distance(X_test)
         dist = np.argsort(dist, axis=1)
         k_nearest = dist[:, :self.K]
         labels = self.y[k_nearest]
