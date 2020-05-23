@@ -37,7 +37,6 @@ X1 = np.random.multivariate_normal(means[1], cov, N).T
 
 X = np.concatenate((X0, X1), axis=1)
 y = np.concatenate((np.ones((1, N)), -1 * np.ones((1, N))), axis=1)
-# Xbar
 X = np.concatenate((np.ones((1, 2 * N)), X), axis=0)
 
 if __name__ == "__main__":
