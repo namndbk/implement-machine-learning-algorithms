@@ -1,4 +1,5 @@
 import numpy as np
+from sklearn.datasets import load_iris
 
 
 def sigmoid(z):
@@ -33,16 +34,21 @@ def logistic_sigmoid(X, y, w_init, lr, tol=1e-4, max_iter=10000):
     return w, max_iter
 
 
+data = load_iris()
+X = data.data
+y = data.target
+X_train, y_train = [], []
+for i in range(len(y)):
+    if y[i] == 1:
+        y_train.append(y[i])
+        X_train.append(X[i])
+    elif y[i] == 0:
+        y_train.append(0)
+        X_train.append(X[i])
+X_train = np.array(X_train)
+y_train = np.array(y_train)
+
 if __name__ == "__main__":
-    np.random.seed(2)
-    X = np.array(
-        [0.50, 0.75, 1.00, 1.25, 1.50, 1.75, 1.75, 2.00, 2.25, 2.50, 2.75, 3.00, 3.25, 3.50, 4.00, 4.25, 4.50, 4.75,
-         5.00, 5.50])
-    X_new = []
-    for i in range(X.shape[0]):
-        X_new.append([X[i], 1.0])
-    X = np.array(X_new)
-    y = np.array([0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1])
-    w, it = logistic_sigmoid(X, y, w_init=np.random.randn(2), lr=0.05, tol=1e-4)
-    print(w[-1])
+    w, it = logistic_sigmoid(X_train, y_train, w_init=np.random.randn(4), lr=0.05, tol=1e-4)
+    print(w[-1], it)
     print(sigmoid(np.dot(X, w[-1])))
