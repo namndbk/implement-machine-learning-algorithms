@@ -41,8 +41,8 @@ if __name__ == "__main__":
     X_new = []
     for i in range(X.shape[0]):
         X_new.append([X[i], 1.0])
-    X_new = np.array(X_new)
+    X = np.array(X_new)
     y = np.array([0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1])
-    w, it = logistic_sigmoid(X_new, y, w_init=np.random.randn(2), lr=0.05, tol=1e-4)
-    print(sigmoid(np.dot(X_new[1], w[-1])))
+    w, it = logistic_sigmoid(X, y, w_init=np.random.randn(2), lr=0.05, tol=1e-4)
     print(w[-1])
+    print(sigmoid(np.dot(X, w[-1])))
