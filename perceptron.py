@@ -9,7 +9,7 @@ def has_converged(X, y, w):
     return np.array_equal(sgn(X, w), y)
 
 
-def perceptron(X, y, w_init):
+def perceptron(X, y, w_init, alpha=1.0):
     w = [w_init]
     N = X.shape[0]
     mis_points = []
@@ -20,7 +20,7 @@ def perceptron(X, y, w_init):
             yi = y[i]
             if sgn(xi, w[-1]) != yi:
                 mis_points.append(mix_id[i])
-                w_new = w[-1] + yi * xi
+                w_new = w[-1] + alpha * yi * xi
                 w.append(w_new)
         if has_converged(X, y, w[-1]):
             break
