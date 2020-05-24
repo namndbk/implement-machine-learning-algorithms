@@ -8,10 +8,7 @@ def sigmoid(z):
 
 def cross_entropy(X, y, w):
     y_hat = sigmoid(np.dot(X, w))
-    s = 0.0
-    for i in range(X.shape[0]):
-        s -= y[i] * np.log(y_hat[i])
-    return s
+    return -np.sum(y * np.log(y_hat))
 
 
 def logistic_sigmoid(X, y, w_init, lr, tol=1e-4, max_iter=10000):
@@ -45,10 +42,10 @@ for i in range(len(y)):
     elif y[i] == 0:
         y_train.append(0)
         X_train.append(X[i])
-X_train = np.array(X_train)
-y_train = np.array(y_train)
+X = np.array(X_train)
+y = np.array(y_train)
 
 if __name__ == "__main__":
-    w, it = logistic_sigmoid(X_train, y_train, w_init=np.random.randn(4), lr=0.05, tol=1e-4)
+    w, it = logistic_sigmoid(X, y, w_init=np.random.randn(4), lr=0.05, tol=1e-4)
     print(w[-1], it)
     print(sigmoid(np.dot(X, w[-1])))
